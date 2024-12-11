@@ -15,9 +15,15 @@
 # 		• Se invece il valore dell'argomento è uguale a zero, allora lo script stampa a
 # 		  video l'argomento che gli è stato passato e poi termina restituendo 0.
 
-if [[ $1 -ge 0 ]] ; then
-	echo $1
-	./discendenti.sh $(( $1-1 )) &
-	wait
-	exit 0
+if [[ $# != 1 ]] ; then
+        echo "Il numero di argomenti non è corretto"
+        exit 1
 fi
+
+ARGS=$1
+for (( i=0; i<${ARGS}; i=${i}+1 )) ; do
+                ./discendenti.sh $(( ${ARGS}-1 )) &
+done
+wait
+echo "${ARGS}"
+exit 0

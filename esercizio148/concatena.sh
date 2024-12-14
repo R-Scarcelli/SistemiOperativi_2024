@@ -10,20 +10,15 @@
 
 echo ""> output.txt #Per svuotare il file nel caso esistesse già
 L=0
-if (( $# > 9 || $# == 0 )) ; then
-        echo "Numero sbagliato di argomenti"
-        exit 1
-fi
-
-PARI=0
-DISPARI=0
-
-for (( NUM=0; ${NUM} <= $#; NUM=${NUM}+1 )) ; do
-        if (( ${NUM}%2 == 0 )) ; then
-                PARI=$(( ${PARI}+$( cat ${!NUM} | wc -l ) ))
-        else
-                DISPARI=$(( ${DISPARI}+$( cat ${!NUM} | wc -l ) ))
-        fi
+for FILE in /usr/include/std* ; do
+        exec {FD}< ${FILE}
+        while read -u ${FD} LINE ; do
+                L=$(( ${L}+1 ))
+                if [[ L -gt 1 && L -lt 5 ]] ; then
+                        echo "${LINE}">> output.txt
+                fi
+        done
+        exec {FD}>&-
 done
 
 echo ${PARI}

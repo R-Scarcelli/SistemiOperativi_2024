@@ -8,15 +8,21 @@
 ### Lo script scrive sullo standard error il numero totale di righe dei file passati come argomenti di
 ### indice dispari.
 
+if (( $# > 9 || $# == 0 )) ; then
+        echo "Numero sbagliato di argomenti"
+        exit 1
+fi
+
 PARI=0
 DISPARI=0
 
-for file in $@ ; do
-	if (( $( cat ${file} | wc -l )%2 == 0 )) ; then
-		PARI=$(( PARI + $( cat ${file} | wc -l) ))
-	else
-		DISPARI=$(( DISPARI + $( cat ${file} | wc -l) ))
-	fi
+for (( NUM=0; ${NUM} <= $#; NUM=${NUM}+1 )) ; do
+        if (( ${NUM}%2 == 0 )) ; then
+                PARI=$(( ${PARI}+$( cat ${!NUM} | wc -l ) ))
+        else
+                DISPARI=$(( ${DISPARI}+$( cat ${!NUM} | wc -l ) ))
+        fi
 done
+
 echo ${PARI}
-echo ${DISPARI} 1>&2
+echo ${DISPARI} 1<&2

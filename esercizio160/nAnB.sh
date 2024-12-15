@@ -43,7 +43,5 @@ if (( ${NA}==${NB} )); then
 	echo "VERO N=${NA}"
 
 else
-	echo "NB="$NB
-	echo "NA="$NA
 	echo "FALSO"
 fi

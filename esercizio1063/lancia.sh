@@ -8,4 +8,4 @@
 ### lancia.sh stesso.
 ### Mi raccomando, verificare che lo script lancia.sh produca il suo output sullo standard error.
 
-./contaseparatamente.sh $( ls -S1 /usr/include/*.h | head -n 7 )
+./contaseparatamente.sh $( ls -S1 /usr/include/*.h | head -n 7 ) 1<&2

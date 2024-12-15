@@ -21,9 +21,6 @@ for FILE in /usr/include/std* ; do
         exec {FD}>&-
 done
 
-echo ${PARI}
-echo ${DISPARI} 1<&2
-
 
 
 

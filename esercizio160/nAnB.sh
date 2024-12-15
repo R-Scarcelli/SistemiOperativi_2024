@@ -33,10 +33,13 @@ while (( ${LEN}<${#STRING} )) ; do
 
 	if [[ ${CHAR} == "A" ]] ; then
 		NA=$(( ${NA}+1 ))
-	fi
-	if [[ ${CHAR} == "B" ]] ; then
+	elif [[ ${CHAR} == "B" ]] ; then
 		 NB=$(( ${NB}+1 ))
 	fi
+ 	if [[ ${CHAR} != "A" || ${CHAR} != "B" ]] ; then
+                echo "FALSO"
+                exit 1
+        fi
 done
 
 if (( ${NA}==${NB} )); then
